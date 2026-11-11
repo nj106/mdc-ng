@@ -1,0 +1,30 @@
+services:
+  mdcng:
+    image: mdcng/mdc:latest
+    container_name: mdcng
+    hostname: Z4Pro-AQ0A
+    network_mode: host
+    environment:
+      - MDC_USERNAME=admin
+      - MDC_PASSWORD=${MDC_PASSWORD}
+      - TZ=Asia/Shanghai
+      - PGID=0
+      - PUID=0
+      - NODE_VERSION=22.22.0
+      - YARN_VERSION=1.22.22
+      - MDC_CONFIG_PATH=/config/config.json
+      - OPENSSL_CONF=/etc/openssl.cnf
+    volumes:
+      - /tmp/zfsv3/sata15/18951898987/data/AV:/AV
+      - /tmp/zfsv3/nvme14/18951898987/data/AV_Scrape:/AV_Scrape
+      - /tmp/zfsv3/sata15/18951898987/data/porn_girl:/porn_girl
+      - /tmp/zfsv3/sata15/18951898987/data/FC2:/FC2
+      - /tmp/zfsv3/nvme14/18951898987/data/FC2_Scrape:/FC2_Scrape
+      - /tmp/zfsv3/nvme13/18951898987/data/Docker/mdcng/config:/config
+      - /tmp/zfsv3/nvme14/18951898987/data/porn_girl_Scrape:/porn_girl_Scrape
+      - /tmp/zfsv3/sata15/18951898987/data/porn_tran:/porn_tran
+      - /tmp/zfsv3/nvme14/18951898987/data/porn_tran_Scrape:/porn_tran_Scrape
+    restart: unless-stopped
+    entrypoint: ["entrypoint.sh"]
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
